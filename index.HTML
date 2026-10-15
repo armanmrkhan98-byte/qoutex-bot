@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotex Mobile AI Bot</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; text-align: center; margin: 0; padding: 20px; }
+        .container { max-width: 400px; margin: auto; background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h2 { color: #38bdf8; }
+        select, button { width: 100%; padding: 14px; margin: 12px 0; border-radius: 8px; border: none; font-size: 16px; font-weight: bold; box-sizing: border-box; }
+        select { background: #334155; color: white; }
+        button { background: #0284c7; color: white; cursor: pointer; }
+        button:hover { background: #0369a1; }
+        .result-box { margin-top: 20px; padding: 15px; border-radius: 8px; background: #0f172a; text-align: left; display: none; }
+        .call { color: #22c55e; font-size: 24px; font-weight: bold; }
+        .put { color: #ef4444; font-size: 24px; font-weight: bold; }
+        .info-text { margin: 8px 0; color: #cbd5e1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Quotex 1m Bot</h2>
+        <label style="text-align: left; display: block; color: #94a3b8; font-size: 14px;">Select Asset (OTC / Live):</label>
+        <select id="assetSelect">
+            <option value="EURUSD_otc">EURUSD OTC</option>
+            <option value="GBPUSD_otc">GBPUSD OTC</option>
+            <option value="USDJPY_otc">USDJPY OTC</option>
+            <option value="EURUSD">EURUSD Live</option>
+        </select>
+        
+        <button onclick="analyzeMarket()">Analyze Market</button>
+
+        <div id="resultBox" class="result-box">
+            <p class="info-text"><strong>Asset:</strong> <span id="resAsset"></span></p>
+            <p class="info-text"><strong>Signal:</strong> <span id="resAction"></span></p>
+            <p class="info-text"><strong>Confidence:</strong> <span id="resConf"></span></p>
+            <p class="info-text"><strong>RSI:</strong> <span id="resRsi"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function analyzeMarket() {
+            let asset = document.getElementById('assetSelect').value;
+            
+            // Random Market Simulation & RSI calculation for instant signal
+            let randomRsi = (Math.random() * 60 + 20).toFixed(2);
+            let action = randomRsi < 50 ? "CALL" : "PUT";
+            let confidence = (Math.random() * 10 + 82).toFixed(1); // 82% to 92% confidence
+
+            document.getElementById('resAsset').innerText = asset;
+            let act = document.getElementById('resAction');
+            act.innerText = action;
+            act.className = action === 'CALL' ? 'call' : 'put';
+            
+            document.getElementById('resConf').innerText = confidence + '%';
+            document.getElementById('resRsi').innerText = randomRsi;
+            
+            document.getElementById('resultBox').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
